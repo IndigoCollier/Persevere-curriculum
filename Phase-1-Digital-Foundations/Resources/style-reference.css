@@ -1,0 +1,87 @@
+s reference · CSS
+/* ============================================
+   Day 3: INSTRUCTOR REFERENCE — Completed CSS
+   Don't show this on the TV. Use it as a cheat
+   sheet if you blank on a value mid-lesson.
+   ============================================ */
+ 
+ 
+/* --- STEP 1: Body & Base Styles --- */
+body {
+  font-family: Arial, sans-serif;  /* sans-serif = clean, no decorative feet */
+  font-size: 16px;
+  background-color: #f5f5f5;       /* light gray — easier on eyes than pure white */
+  color: #222222;                  /* near-black text — better contrast than pure black */
+  margin: 0;
+  padding: 0;
+}
+ 
+h1 {
+  font-size: 2rem;                 /* rem = relative to root font size. 2rem = 32px */
+  color: #1a1a2e;
+}
+ 
+h2 {
+  font-size: 1.25rem;
+  color: #16213e;
+  border-bottom: 2px solid #e94560; /* teach: border shorthand = width style color */
+  padding-bottom: 4px;
+}
+ 
+p {
+  line-height: 1.6;               /* breathing room between lines — readability */
+}
+ 
+ 
+/* --- STEP 2: Class Selectors --- */
+/* In HTML: <section class="bio-section"> */
+.bio-section {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 6px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+ 
+ 
+/* --- STEP 3: Header & Footer --- */
+header {
+  background-color: #1a1a2e;
+  color: #ffffff;
+  padding: 32px 24px;
+  text-align: center;
+}
+ 
+header h1 {
+  color: #ffffff;               /* override the h1 rule above — teach specificity here */
+  margin: 0 0 8px 0;           /* top right bottom left — clockface memory trick */
+}
+ 
+header p {
+  color: #a8b2d8;
+  margin: 0;
+  font-size: 1rem;
+}
+ 
+footer {
+  background-color: #1a1a2e;
+  color: #a8b2d8;
+  text-align: center;
+  padding: 20px;
+  margin-top: 32px;
+  font-size: 0.875rem;
+}
+ 
+ 
+/* --- STEP 4: Main Content Area --- */
+main {
+  max-width: 800px;             /* stops content stretching too wide on big screens */
+  margin: 32px auto;           /* auto left/right = centers the block */
+  padding: 0 16px;
+}
+ 
+ul, ol {
+  padding-left: 24px;
+  line-height: 1.8;
+}
+
