@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Indigo Collier - Contact</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+
+    <nav aria-label="Main navigation">
+      <a href="index.html" class="navbar">Home</a>
+      <a href="about.html" class="navbar">About</a>
+      <a href="contact.html" class="navbar">Contact</a>
+      <a href="projects.html" class="navbar">Projects</a>
+    </nav>
+
+    <header>
+      <h1>Indigo Collier</h1>
+      <p>Software Developer | Memphis, TN</p>
+    </header>
+
+    <main>
+
+      <article class="article">
+        <legend> 
+        <h3>Get In Touch</h3>
+        </legend>
+        
+        <p>
+          Hey there! I would love to connect with you. Please feel free to
+          reach out and let's chat!
+        </p>
+      </article>
+
+      <fieldset>
+
+       <legend class="legend"> 
+        <h2>Send Me a Message</h2>
+       </legend>
+
+      <section class="cform">
+        
+     
+        <form>
+          <!-- All your label/input pairs go here -->
+          <label for="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Your full name"
+            required
+          >
+
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="your@email.com"
+            required
+          >
+
+          <label for="phone">Phone Number (Optional)</label>
+          <input 
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="Your Phone Number"
+          >
+
+          <label for="subject">Subject</label>
+          <select id="subject" name="subject" required>
+            
+            <option value="">-- Select a subject --</option>  
+            <option value="general">General Inquiry</option>  
+            <option value="opportunity">Job Opportunity</option>  
+            <option value="collaboration">Collaboration</option>
+            
+          
+          </select>
+
+            
+         
+
+          <label for="message">Message</label>
+          <textarea
+            id="message"
+            name="message"
+            rows="6"
+            placeholder="Write your message here..."
+            required
+          ></textarea>
+
+          <button type="submit">Send Message</button>
+
+        </form>
+      </section>
+      </fieldset>
+
+      <aside>
+        <h3>Other Ways to Reach Me</h3>
+        <ul>
+          <li>
+            GitHub:
+            <a href="https://github.com/IndigoCollier" class="navbar">
+              github.com/IndigoCollier
+            </a>
+          </li>
+          <li>
+            LinkedIn:
+            <a
+              href="https://www.linkedin.com/in/indigo-collier-134230288/"
+              class="navbar"
+            >
+              linkedin.com/in/indigo-collier-134230288
+            </a>
+          </li>
+        </ul>
+      </aside>
+
+    </main>
+
+    <footer>
+      <p>
+        GitHub: <strong>github.com/IndigoCollier</strong> &nbsp;|&nbsp;
+        LinkedIn: <strong>linkedin.com/in/indigo-collier-134230288</strong>
+      </p>
+      <p>&copy; 2026 Indigo Collier</p>
+    </footer>
+
+  </body>
+</html>
