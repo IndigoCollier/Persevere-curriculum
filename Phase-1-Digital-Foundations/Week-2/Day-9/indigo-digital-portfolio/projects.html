@@ -1,13 +1,36 @@
 <!DOCTYPE html>
+<!--
+  projects.html — DAY 11 UPDATE
+  What changed from Day 9:
+  - card-grid now uses CSS Grid instead of Flexbox
+  - No other HTML changes needed — Grid is controlled entirely in the CSS
+  - The HTML structure (div.card-grid > div.card) stays exactly the same
+  - This is one of Grid's advantages: you can switch layouts by changing CSS only
+-->
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <!--
+      viewport meta tag — REQUIRED for responsive design (Day 9)
+      width=device-width: use the actual device width, not a fake desktop width
+      initial-scale=1.0: do not zoom in or out on load
+    -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Indigo Collier - Projects</title>
+    <!--
+      Link to the shared stylesheet.
+      href="styles.css" is a relative path — looks in the same folder as this HTML file.
+      rel="stylesheet" tells the browser what kind of file it is.
+    -->
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
 
+    <!--
+      NAV — identical on every page (copy-paste rule from Day 5)
+      aria-label="Main navigation" — tells screen readers what this nav is for (Day 6)
+      position: sticky in CSS keeps this at top of screen while scrolling
+    -->
     <nav aria-label="Main navigation">
       <a href="index.html" class="navbar">Home</a>
       <a href="about.html" class="navbar">About</a>
@@ -15,56 +38,80 @@
       <a href="projects.html" class="navbar">Projects</a>
     </nav>
 
+    <!--
+      HEADER — same across all pages for consistent branding
+      The pink background and fadeIn animation are applied in styles.css
+    -->
     <header>
       <h1>Indigo Collier</h1>
       <p>Software Developer | Memphis, TN</p>
     </header>
 
-<main>
-  <h2>My Projects</h2>
-  <div class="card-grid">
+    <!--
+      MAIN — the primary content of this page
+      max-width: 1000px and margin: auto in CSS centers this on large screens
+    -->
+    <main>
+      <h2>My Projects</h2>
 
-    <div class="card">
-      <img src="images/lo-lady-labs-ss.png" alt="Lo and Lady Labs project screenshot">
-      <h3>Lo and Lady Labs</h3>
-      <p>React-based puppy adoption platform with advanced search and interactive galleries.</p>
-    </div>
+      <!--
+        DAY 11: card-grid is now a CSS GRID container.
+        In styles.css: display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        This means: create as many 280px+ columns as will fit in the available space.
+        The browser automatically adjusts column count based on screen width.
+        No media queries needed for the grid layout — it handles itself.
+      -->
+      <div class="card-grid">
 
-    <div class="card">
-      <img src="images/zodiac-countdown.png" alt="Zodiac Countdown app screenshot">
-      <h3>Zodiac Countdown</h3>
-      <p>Birthday countdown with personalized zodiac themes and yearly horoscopes.</p>
-    </div>
+        <!--
+          Each .card is a GRID ITEM — the direct children of a grid container.
+          Unlike Flexbox where items needed explicit widths, grid items
+          automatically take up one grid cell. The CSS controls the rest.
+        -->
+        <div class="card">
+          <!--
+            alt text describes the image for screen readers and broken image fallback.
+            Day 6 rule: be specific, do not say "image of", keep under 125 characters.
+          -->
+          <img src="images/lo-lady-labs-ss-optimized.webp" alt="Lo and Lady Labs puppy adoption platform screenshot showing search interface">
+          <h3>Lo and Lady Labs</h3>
+          <p>React-based puppy adoption platform with advanced search and interactive galleries.</p>
+        </div>
 
-    <div class="card">
-      <img src="images/rescue-tn.png" alt="Rescue Tennessee donation platform screenshot">
-      <h3>Rescue Tennessee</h3>
-      <p>Donation platform connecting donors with dog rescue organizations across Tennessee.</p>
-    </div>
+        <div class="card">
+          <img src="images/zodiac-countdown-optimized.webp" alt="Zodiac Countdown app showing birthday countdown with zodiac theme">
+          <h3>Zodiac Countdown</h3>
+          <p>Birthday countdown with personalized zodiac themes and yearly horoscopes.</p>
+        </div>
 
-    <div class="card">
-      <img src="images/osrs.png" alt="OSRS platform screenshot">
-      <h3>Office Supply Request</h3>
-      <p>This is a Full-stack internal tool for submitting and managing office supply requests — built with Next.js, TypeScript, and Firebase.</p>
-      
-    </div>
+        <div class="card">
+          <img src="images/rescue-tn-optimized.webp" alt="Rescue Tennessee donation platform homepage showing rescue organizations">
+          <h3>Rescue Tennessee</h3>
+          <p>Donation platform connecting donors with dog rescue organizations across Tennessee.</p>
+        </div>
 
-    <div class="card">
-      <img src="images/soul-study.png" alt="Soul Study platform screenshot">
-      <h3>Soul Study</h3>
-      <p>AI-powered study companion for Sterile Processing Technician (SPD) certification prep. Built with Next.js and powered by Claude — featuring streaming chat with Askia (your AI study guide), flashcard decks, adaptive quizzes, and a personal dashboard that tracks your progress.</p>
-    </div>
+        <div class="card">
+          <img src="images/osrs.png" alt="Office Supply Request internal tool showing request submission form">
+          <h3>Office Supply Request</h3>
+          <p>Full-stack internal tool for submitting and managing office supply requests — built with Next.js, TypeScript, and Firebase.</p>
+        </div>
 
-    <div class="card">
-      <img src="images/perseverenow.org.png" alt="Persevere website screenshot">
-      <h3>perseverenow.org</h3>
-      <p>Persevere nonprofit website rebuild — Next.js 14, TypeScript, Tailwind</p>
-    </div>
+        <div class="card">
+          <img src="images/soul-study.png" alt="Soul Study AI-powered study companion showing flashcard interface">
+          <h3>Soul Study</h3>
+          <p>AI-powered study companion for Sterile Processing Technician certification prep. Built with Next.js and powered by Claude.</p>
+        </div>
 
-  </div>
-</main>
+        <div class="card">
+          <img src="images/perseverenow.org-optimized.webp" alt="Persevere nonprofit website rebuilt with modern design">
+          <h3>perseverenow.org</h3>
+          <p>Persevere nonprofit website rebuild — Next.js 14, TypeScript, Tailwind.</p>
+        </div>
 
-<footer>
+      </div><!-- end .card-grid -->
+    </main>
+
+    <footer>
       <p>
         GitHub: <strong>github.com/IndigoCollier</strong> &nbsp;|&nbsp;
         LinkedIn: <strong>linkedin.com/in/indigo-collier-134230288</strong>

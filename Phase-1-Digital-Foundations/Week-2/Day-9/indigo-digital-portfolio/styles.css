@@ -1,43 +1,134 @@
 /* ============================================
    Instructor Version — Indigo Collier
-   Responsive — Days 8 & 9
+   Days 11–13: CSS Grid + Animations + Cross-Browser
+   ============================================
+
+   WHAT CHANGED FROM DAY 9:
+   - Day 11: Added CSS Grid to replace Flexbox on the card grid
+   - Day 12: Added CSS Custom Properties (variables) + @keyframes animations
+   - Day 13: Added vendor prefixes for cross-browser compatibility
+             + organized CSS with section comments
    ============================================ */
 
-/* --- RESET --- */
-/* Fixes horizontal scrolling by making padding count INSIDE width, not added on top */
+
+/* ── RESET ───────────────────────────────────────────────────────────────────
+   box-sizing: border-box makes padding count INSIDE the width, not added on top.
+   Without this, width: 100% + padding = overflow.
+   The * selector applies this to EVERY element on the page.
+   *::before and *::after catch CSS-generated content too. */
 *, *::before, *::after {
   box-sizing: border-box;
 }
 
 
-/* --- STEP 1: Element Selectors --- */
+/* ── DAY 12: CSS CUSTOM PROPERTIES (VARIABLES) ───────────────────────────────
+   :root targets the <html> element — the highest level of the document.
+   Variables defined here are available EVERYWHERE in the stylesheet.
+   Syntax: --variable-name: value;
+   Usage: color: var(--color-primary);
 
+   WHY THIS MATTERS: Before variables, if you wanted to change your brand color
+   you had to find and replace every single instance. Now you change one line
+   and every element that uses it updates automatically. */
+:root {
+  /* Color palette — all your existing colors, now named */
+  --bg-page: #f4f1ee;       /* warm off-white page background */
+  --bg-header: pink;         /* header and footer background */
+  --bg-nav: #48647a;         /* navigation background */
+  --bg-card: white;          /* project card background */
+  --bg-article: #2c3e50;     /* contact page article/aside background */
+
+  --color-primary: #2c3e50;  /* dark navy — headings, buttons */
+  --color-secondary: #48647a;/* muted blue — nav, accents, borders */
+  --color-accent: hotpink;   /* hot pink — borders, highlights */
+  --color-text: #333;        /* main body text */
+  --color-text-muted: #666;  /* card paragraph text, secondary info */
+  --color-white: white;      /* white text on dark backgrounds */
+
+  /* Spacing — consistent values throughout the site */
+  --space-sm: 0.5rem;   /* 8px  */
+  --space-md: 1rem;     /* 16px */
+  --space-lg: 1.5rem;   /* 24px */
+  --space-xl: 2rem;     /* 32px */
+
+  /* Border radius — consistent rounding */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Transitions — consistent animation timing */
+  --transition: 0.3s ease;
+}
+
+
+/* ── DAY 12: KEYFRAME ANIMATIONS ─────────────────────────────────────────────
+   @keyframes defines the animation sequence.
+   "from" = the starting state. "to" = the ending state.
+   opacity: 0 means invisible. opacity: 1 means fully visible.
+   translateY(20px) means pushed down 20px from its natural position.
+   Combined: elements start invisible and 20px lower, then fade in while rising.
+
+   This animation does NOT run automatically — you attach it to elements
+   using the animation property below. */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+    /* -webkit-transform: translateY(20px); DAY 13: Safari prefix — kept here for reference */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* A simpler fade for the header */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+
+/* ── BODY ────────────────────────────────────────────────────────────────────
+   Now using var() to reference the variables defined in :root.
+   If you want to change the page background, change --bg-page in :root
+   and it updates everywhere automatically. */
 body {
-  background-color: #f4f1ee;
+  background-color: var(--bg-page);
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   margin: 0;
   padding: 0;
-  color: #333;
-  overflow-x: hidden; /* prevents any stray element from causing sideways scroll */
+  color: var(--color-text);
+  overflow-x: hidden;
+  /* DAY 13 CROSS-BROWSER: overflow-x is well-supported — no prefix needed */
 }
 
-/* Mobile nav — stacks links vertically */
+
+/* ── NAV ─────────────────────────────────────────────────────────────────────
+   position: sticky keeps the nav at the top as you scroll.
+   DAY 13: -webkit-sticky is needed for Safari — Safari was the last browser
+   to support sticky positioning without a prefix. */
 nav {
-  position: sticky;
+  position: -webkit-sticky; /* DAY 13: Safari 6.1–12 requires this prefix */
+  position: sticky;          /* All modern browsers use the unprefixed version */
   top: 0;
-  z-index: 100;
+  z-index: 100;              /* z-index: 100 ensures nav sits above other content */
   display: flex;
-  flex-direction: column; /* vertical on mobile */
-  background-color: #48647a;
+  flex-direction: column;    /* Mobile: links stack vertically */
+  background-color: var(--bg-nav);
   border-bottom: 2px solid #333;
 }
 
 .navbar {
   text-decoration: none;
-  color: white;
+  color: var(--color-white);
   padding: 14px 16px;
   text-align: center;
   border-bottom: 1px solid #394a56;
+  /* DAY 12: transition makes hover effect smooth instead of snapping */
+  /* DAY 13: -webkit-transition is needed for Chrome 1-25 and Safari 3.1-6 */
+  -webkit-transition: background-color var(--transition);
+  transition: background-color var(--transition);
 }
 
 .navbar:last-child {
@@ -48,7 +139,7 @@ nav {
   background-color: darkgray;
 }
 
-/* Tablet and above — nav goes horizontal */
+/* Tablet 768px and wider: nav links go horizontal */
 @media (min-width: 768px) {
   nav {
     flex-direction: row;
@@ -56,115 +147,117 @@ nav {
     align-items: center;
     padding: 10px;
   }
-
   .navbar {
     border-bottom: none;
     padding: 8px 16px;
   }
-
   .navbar:hover {
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
   }
 }
 
+
+/* ── HEADINGS ─────────────────────────────────────────────────────────────────*/
 h1 {
-  font-size: 2rem; /* smaller on mobile */
+  font-size: 2rem;
   font-weight: bold;
-  color: white;
+  color: var(--color-white);
   text-align: center;
   margin: 0;
 }
 
-/* Scale h1 up on larger screens */
 @media (min-width: 768px) {
-  h1 {
-    font-size: 2.5rem;
-  }
+  h1 { font-size: 2.5rem; }
 }
 
 h2 {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #2c3e50;
-  border-bottom: 2px solid #48647a;
+  color: var(--color-primary);
+  border-bottom: 2px solid var(--color-secondary);
   padding-bottom: 6px;
 }
 
 p {
-  font-size: 1rem; /* 16px minimum on mobile */
+  font-size: 1rem;
   line-height: 1.7;
 }
 
 
-/* --- STEP 2: Color & Typography --- */
-/* #2c3e50 = dark navy  |  #48647a = muted blue  |  #f4f1ee = warm off-white */
-
-
-/* --- STEP 3: The Box Model --- */
-/* margin = space OUTSIDE the element */
-/* padding = space INSIDE the element */
-/* border = the line around the element */
-
-
-/* --- STEP 4: Class Selectors --- */
-
-.section-card {
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 20px 24px;
-  margin-bottom: 24px;
-}
-
-
-/* --- STEP 5: Pulling It Together --- */
-
+/* ── HEADER ──────────────────────────────────────────────────────────────────
+   DAY 12: animation property attaches the fadeIn keyframes.
+   Syntax: animation: [name] [duration] [timing] [delay] [fill-mode]
+   forwards: keeps the final state after animation ends (stays visible)
+   Without forwards: element snaps back to opacity: 0 after animation */
 header {
-  background-color: pink;
-  color: white;
-  padding: 2rem 1.25rem;
+  background-color: var(--bg-header);
+  color: var(--color-white);
+  padding: var(--space-xl) var(--space-md);
   text-align: center;
-  border-bottom: 2px solid hotpink;
+  border-bottom: 2px solid var(--color-accent);
+  /* DAY 12: animate the header fading in when the page loads */
+  animation: fadeIn 0.8s ease forwards;
 }
 
 header p {
-  color: #48647a;
+  color: var(--color-secondary);
   font-size: 1rem;
   margin-top: 8px;
 }
 
+
+/* ── MAIN ────────────────────────────────────────────────────────────────────
+   max-width: 1000px caps the content width on large screens.
+   margin: auto on left and right centers it when width is less than viewport. */
 main {
   max-width: 1000px;
   width: 100%;
-  margin: 2rem auto;
-  padding: 0 1rem; /* 1rem side padding keeps content off screen edges on mobile */
+  margin: var(--space-xl) auto;
+  padding: 0 var(--space-md);
+  /* DAY 12: sections inside main will inherit the animation stagger */
 }
 
 main h2 {
   text-align: center;
   font-size: 1.75rem;
-  color: #2c3e50;
-  margin-bottom: 1.5rem;
+  color: var(--color-primary);
+  margin-bottom: var(--space-lg);
 }
 
+/* DAY 12: Animate each section inside main as it enters
+   animation-fill-mode: both = apply styles before AND after animation */
+main section {
+  animation: fadeInUp 0.6s ease both;
+}
+
+/* Stagger the animations so sections appear one after another.
+   animation-delay pushes the start time forward.
+   nth-child(1) = first section gets 0.1s delay, second gets 0.2s, etc. */
+main section:nth-child(1) { animation-delay: 0.1s; }
+main section:nth-child(2) { animation-delay: 0.2s; }
+main section:nth-child(3) { animation-delay: 0.3s; }
+main section:nth-child(4) { animation-delay: 0.4s; }
+main section:nth-child(5) { animation-delay: 0.5s; }
+
+
+/* ── FOOTER ──────────────────────────────────────────────────────────────────*/
 footer {
-  background-color: pink;
-  border-top: 2px solid hotpink;
-  color: #48647a;
+  background-color: var(--bg-header);
+  border-top: 2px solid var(--color-accent);
+  color: var(--color-secondary);
   text-align: center;
-  padding: 1.5rem 1rem;
+  padding: var(--space-lg) var(--space-md);
   font-size: 0.9rem;
-  margin-top: 2rem;
+  margin-top: var(--space-xl);
 }
 
 
-/* --- FORM ELEMENTS --- */
-
+/* ── FORM ELEMENTS ────────────────────────────────────────────────────────────*/
 label {
   display: block;
-  margin-top: 1rem;
+  margin-top: var(--space-md);
   font-weight: 600;
-  color: #2c3e50;
+  color: var(--color-primary);
   text-align: left;
 }
 
@@ -172,47 +265,48 @@ input,
 select,
 textarea {
   display: block;
-  width: 100%;        /* fills container */
-  max-width: 100%;    /* never overflows */
-  padding: 0.75rem 1rem;
-  margin-top: 0.5rem;
-  border-radius: 0.5rem;
+  width: 100%;
+  max-width: 100%;
+  padding: 0.75rem var(--space-md);
+  margin-top: var(--space-sm);
+  border-radius: var(--radius-md);
   border: 1px solid #ccc;
-  font-size: 1rem;    /* prevents iOS zoom on focus */
-  font-family: inherit;
+  font-size: 1rem;       /* 1rem prevents iOS from zooming in on tap */
+  font-family: inherit;  /* inherit uses the same font as the body */
 }
 
 textarea {
-  border-radius: 8px;
-  resize: vertical; /* lets user resize vertically only */
+  border-radius: var(--radius-md);
+  resize: vertical;
 }
 
 button[type="submit"] {
   display: block;
-  margin: 1.5rem auto 0;
-  padding: 0.75rem 2rem;
-  background-color: #48647a;
-  color: white;
+  margin: var(--space-lg) auto 0;
+  padding: 0.75rem var(--space-xl);
+  background-color: var(--color-secondary);
+  color: var(--color-white);
   border: none;
-  border-radius: 0.5rem;
+  border-radius: var(--radius-md);
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  -webkit-transition: background-color var(--transition); /* DAY 13: Safari prefix */
+  transition: background-color var(--transition);
 }
 
 button[type="submit"]:hover {
-  background-color: #2c3e50;
+  background-color: var(--color-primary);
 }
 
 .cform {
   display: flex;
   flex-direction: column;
-  margin: .875rem auto;
+  margin: 0.875rem auto;
   max-width: 600px;
   background-color: ivory;
-  padding: 1.5rem;
-  border-radius:.875rem;
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
 }
 
 article {
@@ -221,25 +315,25 @@ article {
   max-width: 600px;
   width: 100%;
   text-align: center;
-  background-color: #2c3e50;
-  color: white;
+  background-color: var(--bg-article);
+  color: var(--color-white);
   font-size: 1rem;
   font-weight: 700;
-  padding: 1rem;
-  border-radius: 12px;
+  padding: var(--space-md);
+  border-radius: var(--radius-lg);
 }
 
 aside {
   display: block;
-  margin: 1.5rem auto;
+  margin: var(--space-lg) auto;
   max-width: 600px;
   width: 100%;
   text-align: center;
-  background-color: #2c3e50;
-  color: white;
+  background-color: var(--bg-article);
+  color: var(--color-white);
   font-weight: 700;
-  padding: 1rem;
-  border-radius: 12px;
+  padding: var(--space-md);
+  border-radius: var(--radius-lg);
 }
 
 fieldset {
@@ -248,45 +342,90 @@ fieldset {
   margin: 0;
 }
 
-.legend {
-  text-align: center;
-}
 
-/* --- IMAGES --- */
-
+/* ── IMAGES ──────────────────────────────────────────────────────────────────
+   max-width: 100% prevents images from ever being wider than their container.
+   height: auto maintains the natural aspect ratio as width changes.
+   object-fit: cover fills the space without distorting the image (like "fill" on a wallpaper). */
 img {
   max-width: 100%;
   height: auto;
   display: block;
   border-radius: 1rem;
-  border: .025rem solid hotpink;
+  border: 0.025rem solid var(--color-accent);
   object-fit: cover;
   margin: auto;
 }
 
 
-/* --- PROJECTS — CARD GRID --- */
+/* ── DAY 11: CSS GRID — PROJECTS CARD LAYOUT ─────────────────────────────────
+   WHAT IS CSS GRID?
+   Grid is a two-dimensional layout system. Flexbox lines items up in ONE direction
+   (row OR column). Grid lines items up in TWO directions (rows AND columns) simultaneously.
 
-/* Mobile: cards are full width */
-.card {
-  width: 100%;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+   FLEXBOX vs GRID decision rule:
+   - Use Flexbox when you have items in a single row or column (nav, buttons)
+   - Use Grid when you need rows AND columns at the same time (card layouts, photo galleries)
+
+   HOW auto-fit + minmax() WORKS:
+   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))
+
+   Breaking it down:
+   - repeat() = repeat a column pattern
+   - auto-fit = create as many columns as WILL FIT in the available space
+   - minmax(280px, 1fr) = each column is AT LEAST 280px wide, AT MOST 1fr (equal share)
+   - 1fr = one "fraction" of the available space
+
+   RESULT ON DIFFERENT SCREEN SIZES:
+   - Mobile (375px):  1 card per row (375px can only fit one 280px card)
+   - Tablet (768px):  2 cards per row (768px can fit two 280px cards)
+   - Desktop (1024px): 3 cards per row (1024px can fit three 280px cards)
+
+   THE KEY ADVANTAGE OVER FLEXBOX:
+   With Flexbox you needed 3 separate media queries to control column count.
+   With Grid + auto-fit + minmax(), responsiveness is AUTOMATIC — no media queries needed.
+   The browser figures out how many columns fit and adjusts on its own. */
+.card-grid {
+  display: grid;
+  /* auto-fit + minmax = automatic responsive columns without media queries */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;             /* gap adds space BETWEEN grid cells only, never on outer edges */
+  padding: 0;
+  /* DAY 13: display: grid is fully supported in all modern browsers — no prefix needed */
 }
 
+/* Individual card — no width needed because Grid controls it automatically.
+   With Flexbox, cards needed explicit widths (calc(50% - 12px)) and media queries.
+   With Grid, you remove the width entirely and let the grid template handle it. */
+.card {
+  background-color: var(--bg-card);
+  border-radius: var(--radius-md);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;       /* clips content to card boundaries, keeps image inside rounded corners */
+  /* DAY 12: transition makes the hover lift effect smooth */
+  /* format: transition: [property] [duration] [timing-function] */
+  -webkit-transition: transform var(--transition), box-shadow var(--transition); /* DAY 13: Safari */
+  transition: transform var(--transition), box-shadow var(--transition);
+  /* DAY 12: Animate cards fading in when page loads */
+  animation: fadeInUp 0.5s ease both;
+}
+
+/* Stagger card animations so they appear one at a time instead of all at once */
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+.card:nth-child(4) { animation-delay: 0.4s; }
+.card:nth-child(5) { animation-delay: 0.5s; }
+.card:nth-child(6) { animation-delay: 0.6s; }
+
+/* DAY 12: transform: translateY(-6px) lifts the card UP by 6px on hover.
+   Negative Y values move UP (Y axis goes downward in CSS).
+   Combined with the transition above, this creates a smooth lifting effect.
+   DAY 13: -webkit-transform needed for Chrome 4-35 and Safari 3.1-8 */
 .card:hover {
+  -webkit-transform: translateY(-6px); /* DAY 13: Chrome/Safari prefix */
   transform: translateY(-6px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
-
-.card-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
-  justify-content: center;
 }
 
 .card img {
@@ -294,39 +433,52 @@ img {
   height: 200px;
   object-fit: cover;
   display: block;
-  border-radius: 0;
-  border: none;
-  max-height: none;
-  margin: 0;
+  border-radius: 0;      /* override global img border-radius — cards have square image tops */
+  border: none;          /* override global img border */
+  max-height: none;      /* override global img max-height */
+  margin: 0;             /* override global img margin — no spacing inside the card */
 }
 
 .card h3 {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #2c3e50;
+  color: var(--color-primary);
   margin: 14px 16px 6px;
 }
 
 .card p {
   font-size: 0.9rem;
-  color: #666;
+  color: var(--color-text-muted);
   line-height: 1.5;
   margin: 0 16px 16px;
 }
 
-/* Tablet — 2 cards per row */
-@media (min-width: 768px) {
-  .card {
-    width: calc(50% - 12px);
-  }
+/* DAY 11 NOTE: The Flexbox media queries for card widths are REMOVED.
+   We no longer need:
+     @media (min-width: 768px) { .card { width: calc(50% - 12px); } }
+     @media (min-width: 1024px) { .card { width: calc(33.333% - 16px); } }
+   CSS Grid with auto-fit + minmax() handles all of this automatically. */
 
- 
-}
 
-/* Desktop — 3 cards per row */
-@media (min-width: 1024px) {
-  .card {
-    width: calc(33.333% - 16px);
-  }
-}
+/* ── DAY 13: CROSS-BROWSER NOTES ─────────────────────────────────────────────
+   Modern browsers (Chrome 90+, Firefox 88+, Safari 14+, Edge 90+) support
+   everything in this stylesheet WITHOUT prefixes.
 
+   The only prefixes needed for older browser support:
+   - position: -webkit-sticky   (Safari 6.1–12)
+   - -webkit-transition         (Chrome 1–25, Safari 3.1–6)
+   - -webkit-transform          (Chrome 4–35, Safari 3.1–8)
+
+   display: grid — no prefix needed (all modern browsers supported since 2017)
+   @keyframes — no prefix needed (all modern browsers supported since 2012)
+   CSS variables (var()) — no prefix needed (all modern browsers since 2016)
+   flex-direction — no prefix needed (all modern browsers since 2015)
+
+   BROWSER TESTING CHECKLIST — run these tests and check them off:
+   ☐ Chrome: Open site, test all 4 pages, resize window from 375px to 1400px
+   ☐ Firefox: Open site, test navigation, test contact form tab order
+   ☐ Edge: Open site, verify cards wrap correctly on projects page
+   ☐ Safari (if Mac): Verify sticky nav works, check animations run smoothly
+   ☐ Mobile Chrome: Open on phone, verify hamburger nav or stacked links
+   ☐ Mobile Safari (if iPhone): Verify form inputs do not zoom on tap
+   Save screenshots of any differences you find. */
