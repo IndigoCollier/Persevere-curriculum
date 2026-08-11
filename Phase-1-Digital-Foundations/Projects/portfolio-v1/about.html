@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<!--
+  about.html — ABOUT PAGE
+  DAY 14-15: Tailwind conversion — completing your started version (about-custom-css.html)
+  
+  WHAT YOU ALREADY HAD RIGHT in your attempt:
+  ✅ bg-[#FFFFF0] on body
+  ✅ nav: flex justify-evenly bg-gray-500 text-white
+  ✅ header: bg-pink-200 text-center py-20 border-b-2 border-pink-400
+  ✅ h1: font-semibold text-5xl text-white mb-4
+  ✅ article: bg-gray-700 mx-auto my-8 rounded-xl text-white
+  ✅ aside: bg-gray-700 (matching article style)
+  ✅ footer: bg-pink-200 text-center border-t-2 border-pink-400
+  
+  WHAT THIS VERSION ADDS/COMPLETES:
+  - sticky nav with z-index and hover states on links
+  - What Drives Me: 3 sub-sections styled as cards in a responsive grid
+  - Skills: properly styled list items
+  - Experience: timeline card style
+  - Responsive behavior throughout
+  - Consistent heading styles across all sections
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Indigo Collier - About</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="bg-[#FFFFF0] text-gray-800 min-h-screen">
+
+    <!--
+      sticky top-0 z-50 = stays fixed at top while scrolling, above everything else
+      py-4 = 16px top and bottom padding — same as your attempt
+    -->
+    <nav
+      aria-label="Main navigation"
+      class="sticky top-0 z-50 flex justify-evenly font-semibold bg-gray-500 text-white border-b-2 border-gray-700 py-4"
+    >
+      <!--
+        Links now have padding and hover built in directly.
+        In your attempt the links had class="navbar" which pointed to your old CSS.
+        In Tailwind mode there is no .navbar — everything goes directly on the element.
+      -->
+      <a href="index.html" class="px-4 py-2 rounded hover:bg-gray-600 transition-colors">Home</a>
+      <a href="about.html" class="px-4 py-2 rounded hover:bg-gray-600 transition-colors">About</a>
+      <a href="contact.html" class="px-4 py-2 rounded hover:bg-gray-600 transition-colors">Contact</a>
+      <a href="projects.html" class="px-4 py-2 rounded hover:bg-gray-600 transition-colors">Projects</a>
+    </nav>
+
+    <!--
+      Exact header style from your attempt — no changes needed here.
+    -->
+    <header class="bg-pink-200 text-center py-20 border-b-2 border-pink-400">
+      <h1 class="font-semibold text-5xl text-white mb-4">About Me</h1>
+      <p class="text-gray-500 font-semibold text-lg">Software Developer | Memphis, TN</p>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-12">
+
+      <!-- ── HEADSHOT IMAGE ─────────────────────────────────────────────── -->
+      <!--
+        mx-auto = centers the image horizontally (works because display:block is implicit)
+        my-8 = margin top and bottom: 32px
+        rounded-xl = 12px border radius
+        max-w-xs = max-width: 320px (keeps headshot a reasonable size)
+        
+        Note: You had mx-auto my-8 rounded-xl in your attempt — adding max-w-xs
+        so the headshot does not stretch to full container width on large screens.
+      -->
+      <img
+        src="images/indigo-headshot-cropped-optimized.webp"
+        alt="Indigo Collier smiling in a professional headshot photo"
+        class="mx-auto my-8 rounded-xl max-w-xs w-full"
+      />
+
+      <!-- ── MY JOURNEY ARTICLE ──────────────────────────────────────────── -->
+      <!--
+        Your exact style from the attempt:
+        bg-gray-700 = dark gray background (your featured content style)
+        mx-auto = centered
+        my-8 = 32px top and bottom margin
+        py-10 = 40px top and bottom padding (changed from py-20 — that was very tall)
+        w-full md:w-3/4 = full width on mobile, 75% on tablet+ (your 3/4 = responsive version)
+        px-8 = 32px left and right padding
+        rounded-xl = 12px border radius
+        text-white = white text on dark background
+      -->
+      <article class="bg-gray-700 mx-auto my-8 py-10 w-full md:w-3/4 px-8 rounded-xl text-white">
+        <!--
+          Article heading inside dark card:
+          text-2xl = 24px
+          font-bold = bold
+          mb-4 = margin-bottom: 16px
+        -->
+        <h2 class="text-2xl font-bold mb-4">My Journey So Far</h2>
+        <p class="text-lg leading-relaxed">
+          I've launched into the software development universe and never looked
+          back. I completed an intensive 6-month frontend development program
+          through Persevere, and I'm currently building
+          <strong class="font-semibold">production-ready applications</strong> at Banyan Labs. I love
+          bridging the gap between <em class="italic">design and code</em> — creating
+          interfaces that are both beautiful and functional.
+        </p>
+      </article>
+
+      <!-- ── WHAT DRIVES ME ────────────────────────────────────────────── -->
+      <section class="mb-10">
+        <!--
+          You had this heading style in your attempt:
+          text-center font-semibold text-gray-700 mb-4 text-4xl
+        -->
+        <h2 class="text-center font-semibold text-gray-700 mb-6 text-4xl">What Drives Me</h2>
+
+        <!--
+          3 sub-sections in a responsive grid:
+          grid = display: grid
+          grid-cols-1 = 1 column on mobile (stacked)
+          md:grid-cols-3 = 3 columns on 768px+ (side by side on tablet/desktop)
+          gap-4 = 16px between cards
+          
+          In your attempt these were plain unstyled sections.
+          Now each gets a card layout matching the overall design.
+        -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+          <!--
+            Each drive card:
+            bg-white = white card background (contrast with ivory page)
+            p-5 = 20px padding
+            rounded-xl = 12px rounded corners
+            shadow-sm = subtle shadow for depth
+            border-t-4 = 4px top border accent line
+            border-pink-300 = pink top border (matches color scheme)
+          -->
+          <div class="bg-white p-5 rounded-xl shadow-sm border-t-4 border-pink-300">
+            <!--
+              h3 heading inside card:
+              text-lg = 18px
+              font-bold = bold
+              text-gray-800 = dark text
+              mb-3 = 12px margin-bottom
+            -->
+            <h3 class="text-lg font-bold text-gray-800 mb-3">6-Month Pathway</h3>
+            <!--
+              text-gray-600 = medium gray (secondary content)
+              text-sm = 14px
+              leading-relaxed = comfortable line height
+            -->
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Completed an intensive frontend development program covering core web technologies
+              and modern frameworks including HTML, CSS, JavaScript, React, and Git.
+            </p>
+          </div>
+
+          <div class="bg-white p-5 rounded-xl shadow-sm border-t-4 border-pink-300">
+            <h3 class="text-lg font-bold text-gray-800 mb-3">Always Learning</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Currently diving into <strong>TypeScript</strong> and
+              <strong>Tailwind CSS</strong> to expand my toolkit and build more robust applications.
+            </p>
+          </div>
+
+          <div class="bg-white p-5 rounded-xl shadow-sm border-t-4 border-pink-300">
+            <h3 class="text-lg font-bold text-gray-800 mb-3">Passion for Design</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              I love bridging the gap between <em>design and code</em> — creating
+              interfaces that are both beautiful and functional.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── KEYBOARD IMAGE ─────────────────────────────────────────────── -->
+      <!--
+        Your figure + image from the attempt:
+        mx-auto my-8 rounded-xl max-w-lg = centered, 32px margins, rounded, capped at 512px wide
+        w-full = fills up to that max-width
+      -->
+      <figure class="mb-10">
+        <img
+          src="images/pink-keyboard-optimized.webp"
+          alt="keyboard on pink background"
+          class="mx-auto my-8 rounded-xl max-w-lg w-full"
+        />
+      </figure>
+
+      <!-- ── SKILLS SECTION ────────────────────────────────────────────── -->
+      <section class="mb-10">
+        <!--
+          Same heading style you used: text-center font-semibold text-gray-700 mb-4 text-4xl
+          Changed mb-4 to mb-6 for slightly more breathing room before the list
+        -->
+        <h2 class="text-center font-semibold text-gray-700 mb-6 text-4xl">Skills</h2>
+
+        <!--
+          In your attempt the skills list had no styling on the li items.
+          Now each li gets a card treatment consistent with index.html.
+        -->
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <li class="flex items-center gap-3 bg-white px-4 py-3 rounded-lg shadow-sm">
+            <span class="w-3 h-3 rounded-full bg-pink-400 flex-shrink-0"></span>
+            <span><strong>HTML</strong> — confident and comfortable with structure</span>
+          </li>
+          <li class="flex items-center gap-3 bg-white px-4 py-3 rounded-lg shadow-sm">
+            <span class="w-3 h-3 rounded-full bg-pink-400 flex-shrink-0"></span>
+            <span><strong>CSS</strong> — styling, layouts, and design systems</span>
+          </li>
+          <li class="flex items-center gap-3 bg-white px-4 py-3 rounded-lg shadow-sm">
+            <span class="w-3 h-3 rounded-full bg-pink-400 flex-shrink-0"></span>
+            <span><strong>JavaScript</strong> — interactivity and logic</span>
+          </li>
+          <li class="flex items-center gap-3 bg-white px-4 py-3 rounded-lg shadow-sm">
+            <span class="w-3 h-3 rounded-full bg-pink-400 flex-shrink-0"></span>
+            <span><strong>React</strong> — component-based UI development</span>
+          </li>
+          <li class="flex items-center gap-3 bg-white px-4 py-3 rounded-lg shadow-sm">
+            <span class="w-3 h-3 rounded-full bg-gray-400 flex-shrink-0"></span>
+            <span><strong>TypeScript</strong> — currently learning</span>
+          </li>
+          <li class="flex items-center gap-3 bg-white px-4 py-3 rounded-lg shadow-sm">
+            <span class="w-3 h-3 rounded-full bg-gray-400 flex-shrink-0"></span>
+            <span><strong>Tailwind CSS</strong> — currently learning</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ── EXPERIENCE SECTION ─────────────────────────────────────────── -->
+      <section class="mb-10">
+        <h2 class="text-center font-semibold text-gray-700 mb-6 text-4xl">Experience</h2>
+
+        <!--
+          In your attempt ol items had no styling.
+          Now using the same border-l-4 card style as index.html for consistency.
+          space-y-4 = adds 16px top margin between each li automatically
+        -->
+        <ol class="space-y-4">
+          <li class="bg-white border-l-4 border-pink-300 p-5 rounded-lg shadow-sm">
+            <p class="font-bold text-gray-800">Software Developer — Banyan Labs</p>
+            <p class="text-gray-500 text-sm mb-2">Feb 2026 – Present</p>
+            <p class="text-gray-700 leading-relaxed">
+              Working on production-ready applications, collaborating with senior developers,
+              and shipping scalable features to real users.
+            </p>
+          </li>
+          <li class="bg-white border-l-4 border-pink-300 p-5 rounded-lg shadow-sm">
+            <p class="font-bold text-gray-800">Frontend Development Pathway — Persevere</p>
+            <p class="text-gray-500 text-sm mb-2">Feb 2025 - Jul 2025</p>
+            <p class="text-gray-700 leading-relaxed">
+              Completed an intensive 6-month program covering HTML, CSS, JavaScript, React,
+              and Git. Built <em>multiple solo and group projects.</em>
+            </p>
+          </li>
+        </ol>
+      </section>
+
+      <!-- ── ASIDE — DID YOU KNOW ────────────────────────────────────────── -->
+      <!--
+        Your exact aside style from the attempt:
+        bg-gray-700 mx-auto my-8 rounded-xl text-white
+        Added: w-full md:w-3/4 to match article (responsive width)
+        Changed: py-20 to py-8 px-8 — py-20 was very tall for a small aside
+      -->
+      <aside class="bg-gray-700 mx-auto my-8 py-8 w-full md:w-3/4 px-8 rounded-xl text-white">
+        <h3 class="text-xl font-bold mb-4">Did You Know?</h3>
+        <p class="text-lg leading-relaxed">
+          I built Rescue Tennessee — a donation platform connecting donors with
+          dog rescue organizations across Tennessee. Community-first development
+          is something I care deeply about.
+        </p>
+      </aside>
+
+    </main>
+
+    <footer class="bg-pink-200 text-center py-8 border-t-2 border-pink-400 mt-8">
+      <p class="text-gray-500 font-semibold text-lg">
+        GitHub: <strong>github.com/IndigoCollier</strong> &nbsp;|&nbsp;
+        LinkedIn: <strong>linkedin.com/in/indigo-collier-134230288</strong>
+      </p>
+      <p class="text-gray-500 font-semibold text-lg">&copy; 2026 Indigo Collier</p>
+    </footer>
+
+  </body>
+</html>

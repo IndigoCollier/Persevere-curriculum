@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<!--
+  projects.html — PROJECTS PAGE
+  DAY 14-15: Tailwind conversion of your existing projects.html
+
+  DAY 11 NOTE: Your projects.html used CSS Grid via styles.css:
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  
+  In Tailwind: the same responsive grid behavior uses:
+  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6
+  
+  This gives:
+  - Mobile (< 640px): 1 card per row
+  - Tablet (640px+): 2 cards per row  
+  - Desktop (1024px+): 3 cards per row
+  
+  Your optimized .webp image references are kept exactly as they are.
+  .card and .card img styles from styles.css are replaced with Tailwind classes
+  directly on the div and img elements.
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Indigo Collier - Projects</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="bg-[#FFFFF0] text-gray-800 min-h-screen">
+
+    <nav
+      aria-label="Main navigation"
+      class="sticky top-0 z-50 flex justify-evenly font-semibold bg-gray-500 text-white border-b-2 border-gray-700 py-4"
+    >
+      <a href="index.html" class="px-4 py-2 rounded hover:bg-gray-600 transition-colors">Home</a>
+      <a href="about.html" class="px-4 py-2 rounded hover:bg-gray-600 transition-colors">About</a>
+      <a href="contact.html" class="px-4 py-2 rounded hover:bg-gray-600 transition-colors">Contact</a>
+      <a href="projects.html" class="px-4 py-2 rounded hover:bg-gray-600 transition-colors">Projects</a>
+    </nav>
+
+    <header class="bg-pink-200 text-center py-20 border-b-2 border-pink-400">
+      <h1 class="font-semibold text-5xl text-white mb-4">Indigo Collier</h1>
+      <p class="text-gray-500 font-semibold text-lg">Software Developer | Memphis, TN</p>
+    </header>
+
+    <!--
+      Projects page gets a wider max-width since we need room for 3 cards per row:
+      max-w-5xl = 1024px (vs max-w-4xl = 896px on other pages)
+    -->
+    <main class="max-w-5xl mx-auto px-4 py-12">
+
+      <!--
+        Page heading:
+        text-3xl = 30px
+        font-bold = bold
+        text-gray-700 = dark gray
+        border-b-2 border-pink-300 = pink underline border (consistent with other pages)
+        pb-2 mb-8 = padding-bottom 8px, margin-bottom 32px
+        text-center = centered
+      -->
+      <h2 class="text-3xl font-bold text-gray-700 border-b-2 border-pink-300 pb-2 mb-8 text-center">My Projects</h2>
+
+      <!--
+        TAILWIND GRID — replaces your CSS Grid from styles.css:
+        
+        OLD CSS WAY (styles.css):
+        .card-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 24px;
+        }
+        
+        TAILWIND WAY (directly in HTML):
+        grid = display: grid
+        grid-cols-1 = 1 column by default (mobile)
+        sm:grid-cols-2 = 2 columns at 640px+ (sm: breakpoint)
+        lg:grid-cols-3 = 3 columns at 1024px+ (lg: breakpoint)
+        gap-6 = gap: 24px between all cells (same as your CSS gap: 24px)
+      -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!--
+          CARD — replaces your .card class from styles.css.
+          
+          OLD CSS WAY:
+          .card { background-color: white; border-radius: 10px; box-shadow: ...; overflow: hidden; transition: ...; }
+          .card:hover { transform: translateY(-6px); box-shadow: ...; }
+          
+          TAILWIND WAY:
+          bg-white = white background
+          rounded-xl = border-radius: 12px (slightly more rounded than your 10px — looks cleaner)
+          shadow-md = medium box shadow
+          overflow-hidden = clips image to the card's rounded corners
+          hover:-translate-y-2 = on hover: moves up 8px (translateY(-8px))
+          hover:shadow-xl = larger shadow on hover
+          transition-all = smooth animation on all properties
+          duration-300 = 300ms transition (same as your CSS 0.3s)
+        -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+
+          <!--
+            Card image — replaces .card img from styles.css:
+            
+            OLD CSS WAY:
+            .card img { width: 100%; height: 200px; object-fit: cover; display: block; 
+                        border-radius: 0; border: none; max-height: none; margin: 0; }
+            
+            TAILWIND WAY:
+            w-full = width: 100%
+            h-48 = height: 192px (close to your 200px)
+            object-cover = object-fit: cover (fills space without distortion)
+            block = display: block (removes inline image gap)
+            Note: rounded and border are NOT applied here because the card's
+            overflow-hidden handles clipping, and we don't want a border on card images.
+          -->
+          <img
+            src="images/lo-lady-labs-ss-optimized.webp"
+            alt="Lo and Lady Labs puppy adoption platform screenshot showing search interface"
+            class="w-full h-48 object-cover block"
+          />
+
+          <!--
+            Card content area:
+            p-5 = 20px padding all sides
+          -->
+          <div class="p-5">
+            <!--
+              Card heading:
+              text-xl = 20px
+              font-bold = bold
+              text-gray-800 = dark text
+              mb-2 = 8px margin-bottom
+            -->
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Lo and Lady Labs</h3>
+
+            <!--
+              Card description:
+              text-gray-600 = medium gray
+              text-sm = 14px
+              leading-relaxed = comfortable line height
+              mb-4 = 16px margin-bottom before tags
+            -->
+            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+              React-based puppy adoption platform with advanced search and interactive galleries.
+            </p>
+
+            <!--
+              Tech tags:
+              flex flex-wrap = flex row that wraps if tags overflow
+              gap-2 = 8px between tags
+            -->
+            <div class="flex flex-wrap gap-2">
+              <!--
+                Each tag:
+                bg-pink-100 = very light pink
+                text-pink-700 = dark pink text
+                px-2 py-1 = small padding
+                rounded = small border radius
+                text-xs = extra small (12px)
+                font-medium = slightly bold
+              -->
+              <span class="bg-pink-100 text-pink-700 px-2 py-1 rounded text-xs font-medium">React</span>
+              <span class="bg-pink-100 text-pink-700 px-2 py-1 rounded text-xs font-medium">TypeScript</span>
+              <span class="bg-pink-100 text-pink-700 px-2 py-1 rounded text-xs font-medium">Firebase</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+          <img
+            src="images/zodiac-countdown-optimized.webp"
+            alt="Zodiac Countdown app showing birthday countdown with zodiac theme"
+            class="w-full h-48 object-cover block"
+          />
+          <div class="p-5">
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Zodiac Countdown</h3>
+            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+              Birthday countdown with personalized zodiac themes and yearly horoscopes.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="bg-pink-100 text-pink-700 px-2 py-1 rounded text-xs font-medium">JavaScript</span>
+              <span class="bg-pink-100 text-pink-700 px-2 py-1 rounded text-xs font-medium">HTML</span>
+              <span class="bg-pink-100 text-pink-700 px-2 py-1 rounded text-xs font-medium">CSS</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+          <img
+            src="images/rescue-tn-optimized.webp"
+            alt="Rescue Tennessee donation platform homepage showing rescue organizations"
+            class="w-full h-48 object-cover block"
+          />
+          <div class="p-5">
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Rescue Tennessee</h3>
+            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+              Donation platform connecting donors with dog rescue organizations across Tennessee.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="bg-pink-100 text-pink-700 px-2 py-1 rounded text-xs font-medium">React</span>
+              <span class="bg-pink-100 text-pink-700 px-2 py-1 rounded text-xs font-medium">Next.js</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+          <img
+            src="images/osrs.png"
+            alt="Office Supply Request internal tool showing request submission form"
+            class="w-full h-48 object-cover block"
+          />
+          <div class="p-5">
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Office Supply Request</h3>
+            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+              Full-stack internal tool for submitting and managing office supply requests — built with Next.js, TypeScript, and Firebase.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="bg-pink-100 text-pink-700 px-2 py-1 rounded text-xs font-medium">Next.js</span>
+              <span class="bg-pink-100 text-pink-700 px-2 py-1 rounded text-xs font-medium">TypeScript</span>
+              <span class="bg-pink-100 text-pink-700 px-2 py-1 rounded text-xs font-medium">Firebase</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 5 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+          <img
+            src="images/soul-study.png"
+            alt="Soul Study AI-powered study companion showing flashcard interface"
+            class="w-full h-48 object-cover block"
+          />
+          <div class="p-5">
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Soul Study</h3>
+            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+              AI-powered study companion for Sterile Processing Technician certification prep. Built with Next.js and powered by Claude.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="bg-pink-100 text-pink-700 px-2 py-1 rounded text-xs font-medium">Next.js</span>
+              <span class="bg-pink-100 text-pink-700 px-2 py-1 rounded text-xs font-medium">Claude AI</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 6 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+          <img
+            src="images/perseverenow.org-optimized.webp"
+            alt="Persevere nonprofit website rebuilt with modern design"
+            class="w-full h-48 object-cover block"
+          />
+          <div class="p-5">
+            <h3 class="text-xl font-bold text-gray-800 mb-2">perseverenow.org</h3>
+            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+              Persevere nonprofit website rebuild — Next.js 14, TypeScript, Tailwind.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="bg-pink-100 text-pink-700 px-2 py-1 rounded text-xs font-medium">Next.js 14</span>
+              <span class="bg-pink-100 text-pink-700 px-2 py-1 rounded text-xs font-medium">TypeScript</span>
+              <span class="bg-pink-100 text-pink-700 px-2 py-1 rounded text-xs font-medium">Tailwind</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end card grid -->
+    </main>
+
+    <footer class="bg-pink-200 text-center py-8 border-t-2 border-pink-400 mt-8">
+      <p class="text-gray-500 font-semibold text-lg">
+        GitHub: <strong>github.com/IndigoCollier</strong> &nbsp;|&nbsp;
+        LinkedIn: <strong>linkedin.com/in/indigo-collier-134230288</strong>
+      </p>
+      <p class="text-gray-500 font-semibold text-lg">&copy; 2026 Indigo Collier</p>
+    </footer>
+
+  </body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<!--
+  contact.html — CONTACT PAGE
+  DAY 14-15: Tailwind conversion of your existing contact.html
+  
+  STRUCTURAL FIX APPLIED HERE:
+  Your previous contact.html had a fieldset/legend structure issue we flagged before:
+  - legend was inside article (invalid)
+  - legend was inside section inside fieldset (legend must be FIRST direct child of fieldset)
+  
+  This version fixes that properly:
+  - article = intro section (Get In Touch) — no legend, no fieldset
+  - form has fieldset with legend as its FIRST direct child
+  - All inputs are inside that fieldset
+  - This is semantically correct and will pass W3C validation
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Indigo Collier - Contact</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="bg-[#FFFFF0] text-gray-800 min-h-screen">
+
+    <nav
+      aria-label="Main navigation"
+      class="sticky top-0 z-50 flex justify-evenly font-semibold bg-gray-500 text-white border-b-2 border-gray-700 py-4"
+    >
+      <a href="index.html" class="px-4 py-2 rounded hover:bg-gray-600 transition-colors">Home</a>
+      <a href="about.html" class="px-4 py-2 rounded hover:bg-gray-600 transition-colors">About</a>
+      <a href="contact.html" class="px-4 py-2 rounded hover:bg-gray-600 transition-colors">Contact</a>
+      <a href="projects.html" class="px-4 py-2 rounded hover:bg-gray-600 transition-colors">Projects</a>
+    </nav>
+
+    <header class="bg-pink-200 text-center py-20 border-b-2 border-pink-400">
+      <h1 class="font-semibold text-5xl text-white mb-4">Indigo Collier</h1>
+      <p class="text-gray-500 font-semibold text-lg">Software Developer | Memphis, TN</p>
+    </header>
+
+    <!--
+      max-w-2xl = caps at 672px — narrower than other pages because a form
+      should not stretch across a huge screen (hard to read and fill in)
+    -->
+    <main class="max-w-2xl mx-auto px-4 py-12">
+
+      <!-- ── ARTICLE — GET IN TOUCH INTRO ──────────────────────────────── -->
+      <!--
+        Same dark card style as about.html article and aside.
+        text-center = centers the text inside
+        No fieldset or legend here — article is just for intro content.
+      -->
+      <article class="bg-gray-700 text-white p-8 rounded-xl mb-8 text-center">
+        <h3 class="text-2xl font-bold mb-4">Get In Touch</h3>
+        <p class="text-lg leading-relaxed text-gray-200">
+          Hey there! I would love to connect with you. Please feel free to
+          reach out and let's chat!
+        </p>
+      </article>
+
+      <!-- ── CONTACT FORM ────────────────────────────────────────────────── -->
+      <!--
+        Form container card:
+        bg-white = white background for the form area
+        p-8 = 32px padding all sides
+        rounded-xl = 12px border radius
+        shadow-md = medium shadow for depth
+        mb-8 = 32px margin below before the aside
+      -->
+      <div class="bg-white p-8 rounded-xl shadow-md mb-8">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Send Me a Message</h2>
+
+        <!--
+          form element:
+          action="#" = stays on same page (no backend yet — Phase 4 covers this)
+          method="post" = standard for forms with personal data
+        -->
+        <form action="#" method="post">
+
+          <!--
+            fieldset: groups all form fields together
+            legend: MUST be the first direct child of fieldset — this is the fix
+            border-0 p-0 m-0 = removes all default fieldset styling (browser adds a border by default)
+            
+            sr-only on legend = screen reader only — visually hidden but accessible.
+            The h2 above provides the visual heading. The legend provides the accessible label
+            for the fieldset group that screen readers announce.
+          -->
+          <fieldset class="border-0 p-0 m-0">
+            <legend class="sr-only">Contact Information</legend>
+
+            <!-- 
+              Each form group:
+              mb-5 = 20px margin-bottom (space between field groups)
+            -->
+            <div class="mb-5">
+              <!--
+                Label:
+                block = display: block (puts label on its own line above the input)
+                text-sm = 14px
+                font-semibold = slightly bold
+                text-gray-700 = dark gray
+                mb-1 = 4px below the label before the input
+              -->
+              <label for="name" class="block text-sm font-semibold text-gray-700 mb-1">Name</label>
+              <!--
+                Input:
+                w-full = width: 100% (fills the form container)
+                px-4 py-3 = comfortable padding inside the input
+                border = 1px solid border
+                border-gray-300 = light gray border
+                rounded-lg = slightly rounded corners
+                text-gray-800 = dark text inside
+                focus:outline-none = removes default browser focus outline
+                focus:ring-2 = adds a 2px ring on focus (accessibility)
+                focus:ring-pink-300 = pink ring color on focus (matches color scheme)
+                transition = smooth focus animation
+              -->
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Your full name"
+                required
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-pink-300 transition"
+              />
+            </div>
+
+            <div class="mb-5">
+              <label for="email" class="block text-sm font-semibold text-gray-700 mb-1">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="your@email.com"
+                required
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-pink-300 transition"
+              />
+            </div>
+
+            <div class="mb-5">
+              <!--
+                Optional field — label shows (Optional) to set expectations
+              -->
+              <label for="phone" class="block text-sm font-semibold text-gray-700 mb-1">
+                Phone Number <span class="text-gray-400 font-normal">(Optional)</span>
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="Your Phone Number"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-pink-300 transition"
+              />
+            </div>
+
+            <div class="mb-5">
+              <label for="subject" class="block text-sm font-semibold text-gray-700 mb-1">Subject</label>
+              <!--
+                Select dropdown:
+                appearance-none = removes browser default arrow styling (cleaner look)
+                bg-white = white background
+                cursor-pointer = shows a hand cursor on hover (signals it is clickable)
+              -->
+              <select
+                id="subject"
+                name="subject"
+                required
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-pink-300 transition cursor-pointer"
+              >
+                <option value="">-- Select a subject --</option>
+                <option value="general">General Inquiry</option>
+                <option value="opportunity">Job Opportunity</option>
+                <option value="collaboration">Collaboration</option>
+              </select>
+            </div>
+
+            <div class="mb-6">
+              <label for="message" class="block text-sm font-semibold text-gray-700 mb-1">Message</label>
+              <!--
+                Textarea:
+                resize-vertical = only lets user drag to resize vertically (not horizontally)
+                This prevents the textarea from breaking the layout if user resizes it.
+              -->
+              <textarea
+                id="message"
+                name="message"
+                rows="6"
+                placeholder="Write your message here..."
+                required
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-pink-300 transition resize-vertical"
+              ></textarea>
+            </div>
+
+          </fieldset>
+
+          <!--
+            Submit button:
+            w-full = full width (fills the form)
+            bg-gray-700 = dark button (matches your article/aside dark style)
+            text-white = white text
+            py-3 = 12px top and bottom padding
+            rounded-lg = rounded corners
+            font-semibold = slightly bold text
+            hover:bg-gray-800 = darker on hover
+            transition-colors = smooth hover animation
+            cursor-pointer = hand cursor
+          -->
+          <button
+            type="submit"
+            class="w-full bg-gray-700 text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors cursor-pointer"
+          >
+            Send Message
+          </button>
+
+        </form>
+      </div>
+
+      <!-- ── ASIDE — OTHER WAYS TO REACH ME ────────────────────────────── -->
+      <!--
+        Dark card matching the article style from about.html.
+      -->
+      <aside class="bg-gray-700 text-white p-8 rounded-xl">
+        <h3 class="text-xl font-bold mb-4">Other Ways to Reach Me</h3>
+
+        <!--
+          space-y-3 = 12px spacing between list items
+          list-none = removes default bullet styling
+        -->
+        <ul class="space-y-3 list-none">
+          <li class="flex items-center gap-3">
+            <!--
+              Inline link inside the dark aside:
+              text-pink-300 = pink link color (visible on dark background)
+              hover:text-pink-100 = lighter pink on hover
+              underline = underline decoration
+            -->
+            <span class="text-gray-300 font-semibold">GitHub:</span>
+            <a
+              href="https://github.com/IndigoCollier"
+              class="text-pink-300 hover:text-pink-100 underline transition-colors"
+              aria-label="Visit Indigo's GitHub profile"
+            >
+              github.com/IndigoCollier
+            </a>
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="text-gray-300 font-semibold">LinkedIn:</span>
+            <a
+              href="https://www.linkedin.com/in/indigo-collier-134230288/"
+              class="text-pink-300 hover:text-pink-100 underline transition-colors"
+              aria-label="Visit Indigo's LinkedIn profile"
+            >
+              linkedin.com/in/indigo-collier-134230288
+            </a>
+          </li>
+        </ul>
+      </aside>
+
+    </main>
+
+    <footer class="bg-pink-200 text-center py-8 border-t-2 border-pink-400 mt-8">
+      <p class="text-gray-500 font-semibold text-lg">
+        GitHub: <strong>github.com/IndigoCollier</strong> &nbsp;|&nbsp;
+        LinkedIn: <strong>linkedin.com/in/indigo-collier-134230288</strong>
+      </p>
+      <p class="text-gray-500 font-semibold text-lg">&copy; 2026 Indigo Collier</p>
+    </footer>
+
+  </body>
+</html>
