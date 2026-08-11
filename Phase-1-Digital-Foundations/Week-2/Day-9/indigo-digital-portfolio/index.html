@@ -1,103 +1,348 @@
 <!DOCTYPE html>
+<!--
+  index.html — HOME PAGE
+  DAY 14-15: Converted from custom CSS to Tailwind CSS
+  
+  WHAT CHANGED: Removed <link rel="stylesheet" href="styles.css">
+  Replaced with: <script src="https://cdn.tailwindcss.com"></script>
+  All styling now lives as utility classes directly in the HTML.
+  
+  YOUR DESIGN CHOICES (from your about.html Tailwind attempt):
+  - Body background: bg-[#FFFFF0] = ivory/cream (your custom hex color)
+  - Nav: bg-gray-500 with gray-700 border
+  - Header/Footer: bg-pink-200 with pink-400 border
+  - Content boxes: bg-gray-700 (dark) for featured sections
+  - Text on dark: text-white
+  - Text on light: text-gray-700 or text-gray-500
+-->
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Indigo Collier - Home</title>
-    <!-- CSS link  -->
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
 
-    <nav aria-label="Main navigation">
-      <a href="index.html" class="navbar" >Home</a>
-      <a href="about.html" class="navbar">About</a>
-      <a href="contact.html" class="navbar">Contact</a>
-      <a href="projects.html" class="navbar">Projects</a>
+    <!--
+      TAILWIND CDN — loads the entire Tailwind framework.
+      Must be in <head> so classes work before the page renders.
+      This replaces your entire styles.css for layout and visual styling.
+    -->
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <!--
+    body classes:
+    bg-[#FFFFF0] = your custom ivory color (Tailwind supports arbitrary values in square brackets)
+    text-gray-800 = default dark text for readability
+    min-h-screen = minimum height: 100vh so page fills the viewport
+  -->
+  <body class="bg-[#FFFFF0] text-gray-800 min-h-screen">
+
+    <!--
+      NAV — sticky stays at top while scrolling
+      sticky = position: sticky
+      top-0 = top: 0 (sticks to the very top)
+      z-50 = z-index: 50 (sits above other content as you scroll)
+      flex = display: flex (puts links in a row)
+      justify-evenly = justify-content: space-evenly (equal space around each link)
+      font-semibold = font-weight: 600 (slightly bold)
+      bg-gray-500 = medium gray background (your design choice)
+      text-white = white text
+      border-b-2 = border-bottom: 2px solid
+      border-gray-700 = dark gray border color
+      py-4 = padding-top and padding-bottom: 16px
+    -->
+    <nav
+      aria-label="Main navigation"
+      class="sticky top-0 z-50 flex justify-evenly font-semibold bg-gray-500 text-white border-b-2 border-gray-700 py-4"
+    >
+      <!--
+        Each nav link:
+        px-4 = padding-left and padding-right: 16px
+        py-2 = padding-top and bottom: 8px
+        rounded = border-radius: 4px
+        hover:bg-gray-600 = on hover: slightly darker background
+        transition-colors = smooth color change on hover (like your old .navbar:hover)
+        No more class="navbar" needed — styling is directly on the element
+      -->
+      <a href="index.html" class="px-4 py-2 rounded hover:bg-gray-600 transition-colors">Home</a>
+      <a href="about.html" class="px-4 py-2 rounded hover:bg-gray-600 transition-colors">About</a>
+      <a href="contact.html" class="px-4 py-2 rounded hover:bg-gray-600 transition-colors">Contact</a>
+      <a href="projects.html" class="px-4 py-2 rounded hover:bg-gray-600 transition-colors">Projects</a>
     </nav>
- 
-    <header>
-      <h1>Indigo Collier</h1>
-      <p>Software Developer | Memphis, TN</p>
+
+    <!--
+      HEADER — pink banner matching your design
+      bg-pink-200 = light pink background (your choice from Tailwind attempt)
+      text-center = text-align: center
+      py-20 = padding-top and bottom: 80px (5rem) — large hero spacing
+      border-b-2 = 2px solid bottom border
+      border-pink-400 = medium pink border color
+    -->
+    <header class="bg-pink-200 text-center py-20 border-b-2 border-pink-400">
+      <!--
+        h1:
+        font-semibold = font-weight: 600
+        text-5xl = font-size: 48px (3rem)
+        text-white = white text
+        mb-4 = margin-bottom: 16px
+      -->
+      <h1 class="font-semibold text-5xl text-white mb-4">Indigo Collier</h1>
+
+      <!--
+        Tagline paragraph:
+        text-gray-500 = medium gray text (readable on light pink)
+        font-semibold = slightly bold
+        text-lg = font-size: 18px
+      -->
+      <p class="text-gray-500 font-semibold text-lg">Software Developer | Memphis, TN</p>
     </header>
- 
-    <main>
- 
-      <section>
-        <h2>About Me</h2>
-        <p>
-          I'm a <strong>software developer</strong> who launched into the development
-          universe and never looked back. I completed an intensive 6-month frontend
-          development program through Persevere, and I'm currently building
-          production-ready applications at Banyan Labs. I love bridging the gap
-          between <em>design and code</em> — creating interfaces that are both
-          beautiful and functional.
-        </p>
+
+    <!--
+      MAIN content wrapper:
+      max-w-4xl = max-width: 896px (caps width on large screens)
+      mx-auto = margin: 0 auto (centers the block)
+      px-4 = padding-left/right: 16px (keeps content off screen edges on mobile)
+      py-12 = padding-top/bottom: 48px
+    -->
+    <main class="max-w-4xl mx-auto px-4 py-12">
+
+      <!-- ── ABOUT ME SECTION ──────────────────────────────────────────── -->
+      <!--
+        mb-10 = margin-bottom: 40px (space between sections)
+      -->
+      <section class="mb-10">
+        <!--
+          Section heading — consistent style across all sections:
+          text-3xl = font-size: 30px
+          font-bold = font-weight: 700
+          text-gray-700 = dark gray (your heading color choice)
+          border-b-2 = 2px bottom border (underline effect)
+          border-pink-300 = pink underline matches your color scheme
+          pb-2 = padding-bottom: 8px (space between text and border)
+          mb-4 = margin-bottom: 16px
+        -->
+        <h2 class="text-3xl font-bold text-gray-700 border-b-2 border-pink-300 pb-2 mb-4">About Me</h2>
+
+        <!--
+          Content in a dark card — matching your article/aside style from about.html:
+          bg-gray-700 = dark gray background
+          text-white = white text
+          p-6 = padding: 24px all sides
+          rounded-xl = border-radius: 12px
+          text-lg = 18px font size
+          leading-relaxed = line-height: 1.625 (comfortable to read)
+        -->
+        <div class="bg-gray-700 text-white p-6 rounded-xl text-lg leading-relaxed">
+          I'm a <strong class="font-semibold">software developer</strong> who launched into the
+          development universe and never looked back. I completed an intensive 6-month frontend
+          development program through Persevere, and I'm currently building production-ready
+          applications at Banyan Labs. I love bridging the gap between
+          <em class="italic">design and code</em> — creating interfaces that are both beautiful
+          and functional.
+        </div>
       </section>
- 
-      <section>
-        <h2>Skills I'm Building</h2>
-        <ul>
-          <li>HTML – confident and comfortable with structure</li>
-          <li>CSS – styling, layouts, and design systems</li>
-          <li>JavaScript – interactivity and logic</li>
-          <li>React – component-based UI development</li>
-          <li>TypeScript – currently learning</li>
-          <li>Tailwind CSS – currently learning</li>
+
+      <!-- ── SKILLS SECTION ────────────────────────────────────────────── -->
+      <section class="mb-10">
+        <h2 class="text-3xl font-bold text-gray-700 border-b-2 border-pink-300 pb-2 mb-4">Skills I'm Building</h2>
+
+        <!--
+          Two-column grid on tablet+, one column on mobile:
+          grid = display: grid
+          grid-cols-1 = 1 column by default (mobile)
+          sm:grid-cols-2 = 2 columns on 640px+ (Tailwind's sm: breakpoint)
+          gap-3 = 12px gap between grid items
+        -->
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <!--
+            Each skill item:
+            flex = puts the dot and text side by side
+            items-center = vertically aligns them
+            gap-3 = 12px between dot and text
+            bg-white = white background
+            px-4 py-3 = padding for the card feel
+            rounded-lg = slightly rounded
+            shadow-sm = very subtle shadow
+          -->
+          <li class="flex items-center gap-3 bg-white px-4 py-3 rounded-lg shadow-sm">
+            <!--
+              Colored dot indicator:
+              w-3 h-3 = 12px × 12px square
+              rounded-full = makes it a circle
+              bg-pink-400 = pink color
+              flex-shrink-0 = prevents it from squishing when text is long
+            -->
+            <span class="w-3 h-3 rounded-full bg-pink-400 flex-shrink-0"></span>
+            <span><strong>HTML</strong> — confident and comfortable with structure</span>
+          </li>
+          <li class="flex items-center gap-3 bg-white px-4 py-3 rounded-lg shadow-sm">
+            <span class="w-3 h-3 rounded-full bg-pink-400 flex-shrink-0"></span>
+            <span><strong>CSS</strong> — styling, layouts, and design systems</span>
+          </li>
+          <li class="flex items-center gap-3 bg-white px-4 py-3 rounded-lg shadow-sm">
+            <span class="w-3 h-3 rounded-full bg-pink-400 flex-shrink-0"></span>
+            <span><strong>JavaScript</strong> — interactivity and logic</span>
+          </li>
+          <li class="flex items-center gap-3 bg-white px-4 py-3 rounded-lg shadow-sm">
+            <span class="w-3 h-3 rounded-full bg-pink-400 flex-shrink-0"></span>
+            <span><strong>React</strong> — component-based UI development</span>
+          </li>
+          <li class="flex items-center gap-3 bg-white px-4 py-3 rounded-lg shadow-sm">
+            <!-- gray dot = "currently learning" status indicator -->
+            <span class="w-3 h-3 rounded-full bg-gray-400 flex-shrink-0"></span>
+            <span><strong>TypeScript</strong> — currently learning</span>
+          </li>
+          <li class="flex items-center gap-3 bg-white px-4 py-3 rounded-lg shadow-sm">
+            <span class="w-3 h-3 rounded-full bg-gray-400 flex-shrink-0"></span>
+            <span><strong>Tailwind CSS</strong> — currently learning</span>
+          </li>
         </ul>
       </section>
- 
-      <section>
-        <h2>My Goals</h2>
-        <ol>
-          <li>Keep shipping scalable, visually impressive features at Banyan Labs</li>
-          <li>Get fully comfortable with TypeScript and Tailwind CSS</li>
-          <li>Build projects that serve my community in Tennessee</li>
-          <li>Grow into a full-stack developer</li>
+
+      <!-- ── GOALS SECTION ─────────────────────────────────────────────── -->
+      <section class="mb-10">
+        <h2 class="text-3xl font-bold text-gray-700 border-b-2 border-pink-300 pb-2 mb-4">My Goals</h2>
+
+        <!--
+          Numbered list styled as ordered cards:
+          space-y-3 = adds margin-top: 12px between each li (cleaner than writing mb on each)
+          list-none = removes default list styling (we'll add custom numbers)
+          counter-reset and counter-increment are not in Tailwind so we use plain styling
+        -->
+        <ol class="space-y-3">
+          <!--
+            Each goal item:
+            flex = row layout
+            items-start = align to top (for multi-line items)
+            gap-4 = 16px between number and text
+            bg-white = white card background
+            px-4 py-3 = comfortable padding
+            rounded-lg = rounded corners
+            shadow-sm = subtle shadow
+          -->
+          <li class="flex items-start gap-4 bg-white px-4 py-3 rounded-lg shadow-sm">
+            <!--
+              Number circle:
+              w-8 h-8 = 32px circle
+              rounded-full = makes it circular
+              bg-pink-300 = pink background
+              text-white = white text inside
+              flex items-center justify-center = centers the number inside the circle
+              font-bold = bold number
+              flex-shrink-0 = prevents shrinking
+              text-sm = 14px font size for the number
+            -->
+            <span class="w-8 h-8 rounded-full bg-pink-300 text-white flex items-center justify-center font-bold flex-shrink-0 text-sm">1</span>
+            <span class="text-gray-700 leading-relaxed pt-1">Keep shipping scalable, visually impressive features at Banyan Labs</span>
+          </li>
+          <li class="flex items-start gap-4 bg-white px-4 py-3 rounded-lg shadow-sm">
+            <span class="w-8 h-8 rounded-full bg-pink-300 text-white flex items-center justify-center font-bold flex-shrink-0 text-sm">2</span>
+            <span class="text-gray-700 leading-relaxed pt-1">Get fully comfortable with TypeScript and Tailwind CSS</span>
+          </li>
+          <li class="flex items-start gap-4 bg-white px-4 py-3 rounded-lg shadow-sm">
+            <span class="w-8 h-8 rounded-full bg-pink-300 text-white flex items-center justify-center font-bold flex-shrink-0 text-sm">3</span>
+            <span class="text-gray-700 leading-relaxed pt-1">Build projects that serve my community in Tennessee</span>
+          </li>
+          <li class="flex items-start gap-4 bg-white px-4 py-3 rounded-lg shadow-sm">
+            <span class="w-8 h-8 rounded-full bg-pink-300 text-white flex items-center justify-center font-bold flex-shrink-0 text-sm">4</span>
+            <span class="text-gray-700 leading-relaxed pt-1">Grow into a full-stack developer</span>
+          </li>
         </ol>
       </section>
- 
-      <section>
-        <h2>Projects</h2>
-        <p>
-          <strong>Lo and Lady Labs</strong> — A React-based puppy adoption platform
-          with advanced search, interactive galleries, and streamlined inquiry workflows.
-        </p>
-        <p>
-          <strong>Zodiac Countdown</strong> — A fun interactive web app where users
-          select their birthdate and get a countdown to their next birthday, complete
-          with a <em>personalized zodiac theme</em> and yearly horoscopes.
-        </p>
-        <p>
-          <strong>Rescue Tennessee</strong> — A donation platform connecting donors
-          with dog rescue organizations across Tennessee.
-        </p>
+
+      <!-- ── FEATURED PROJECTS SECTION ─────────────────────────────────── -->
+      <section class="mb-10">
+        <h2 class="text-3xl font-bold text-gray-700 border-b-2 border-pink-300 pb-2 mb-4">Projects</h2>
+
+        <!--
+          Three project previews in a responsive grid:
+          grid grid-cols-1 md:grid-cols-3 = 1 col mobile, 3 cols on 768px+
+          gap-4 = 16px gap between cards
+        -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+          <!--
+            Project preview card:
+            bg-gray-700 = dark background (your featured content style)
+            text-white = white text
+            p-5 = 20px padding
+            rounded-xl = 12px border radius
+            hover:-translate-y-1 = lifts 4px on hover (Day 12 transform)
+            transition-transform = smooth animation
+            duration-300 = 300ms
+          -->
+          <div class="bg-gray-700 text-white p-5 rounded-xl hover:-translate-y-1 transition-transform duration-300">
+            <h3 class="font-bold text-lg mb-2">Lo and Lady Labs</h3>
+            <p class="text-gray-300 text-sm leading-relaxed">React-based puppy adoption platform with advanced search, interactive galleries, and streamlined inquiry workflows.</p>
+          </div>
+          <div class="bg-gray-700 text-white p-5 rounded-xl hover:-translate-y-1 transition-transform duration-300">
+            <h3 class="font-bold text-lg mb-2">Zodiac Countdown</h3>
+            <p class="text-gray-300 text-sm leading-relaxed">Fun interactive app where users select their birthdate and get a countdown with a personalized zodiac theme and horoscopes.</p>
+          </div>
+          <div class="bg-gray-700 text-white p-5 rounded-xl hover:-translate-y-1 transition-transform duration-300">
+            <h3 class="font-bold text-lg mb-2">Rescue Tennessee</h3>
+            <p class="text-gray-300 text-sm leading-relaxed">Donation platform connecting donors with dog rescue organizations across Tennessee.</p>
+          </div>
+        </div>
+
+        <!--
+          Link to full projects page:
+          inline-block = lets it have padding without being full width
+          bg-pink-300 = pink background
+          text-white = white text
+          px-6 py-2 = padding
+          rounded-full = pill shape
+          hover:bg-pink-400 = darker pink on hover
+          transition-colors = smooth hover animation
+          font-semibold = slightly bold
+        -->
+        <a href="projects.html" class="inline-block bg-pink-300 text-white px-6 py-2 rounded-full hover:bg-pink-400 transition-colors font-semibold">
+          View All Projects →
+        </a>
       </section>
- 
-      <section>
-        <h2>Experience</h2>
-        <p>
-          <strong>Software Developer</strong> – Banyan Labs (Feb 2026 – Present)<br />
-          Working on production-ready applications, collaborating with senior developers,
-          and shipping scalable features to real users.
-        </p>
-        <p>
-          <strong>Frontend Development Pathway</strong> – Persevere (Feb 2025 – Jul 2025)<br />
-          Completed an intensive 6-month program covering HTML, CSS, JavaScript, React,
-          and Git. Built <em>multiple solo and group projects.</em>
-        </p>
+
+      <!-- ── EXPERIENCE SECTION ─────────────────────────────────────────── -->
+      <section class="mb-10">
+        <h2 class="text-3xl font-bold text-gray-700 border-b-2 border-pink-300 pb-2 mb-4">Experience</h2>
+
+        <div class="space-y-4">
+          <!--
+            Experience card:
+            bg-white = white background
+            border-l-4 = 4px left border (accent line)
+            border-pink-300 = pink accent
+            p-5 = 20px padding
+            rounded-lg shadow-sm = subtle card styling
+          -->
+          <div class="bg-white border-l-4 border-pink-300 p-5 rounded-lg shadow-sm">
+            <p class="font-bold text-gray-800">Software Developer — Banyan Labs</p>
+            <p class="text-gray-500 text-sm mb-2">Feb 2026 – Present</p>
+            <p class="text-gray-700 leading-relaxed">Working on production-ready applications, collaborating with senior developers, and shipping scalable features to real users.</p>
+          </div>
+          <div class="bg-white border-l-4 border-pink-300 p-5 rounded-lg shadow-sm">
+            <p class="font-bold text-gray-800">Frontend Development Pathway — Persevere</p>
+            <p class="text-gray-500 text-sm mb-2">Feb 2025 – Jul 2025</p>
+            <p class="text-gray-700 leading-relaxed">Completed an intensive 6-month program covering HTML, CSS, JavaScript, React, and Git. Built <em>multiple solo and group projects.</em></p>
+          </div>
+        </div>
       </section>
- 
+
     </main>
- 
-    <footer>
-      <p>
+
+    <!--
+      FOOTER — matches your design from about-custom-css.html:
+      bg-pink-200 = light pink background
+      text-center = centered
+      py-8 = 32px padding (slightly less than the header's py-20 — footer is more compact)
+      border-t-2 border-pink-400 = 2px pink top border
+      mt-8 = 32px margin-top so footer has breathing room below main content
+    -->
+    <footer class="bg-pink-200 text-center py-8 border-t-2 border-pink-400 mt-8">
+      <p class="text-gray-500 font-semibold text-lg">
         GitHub: <strong>github.com/IndigoCollier</strong> &nbsp;|&nbsp;
         LinkedIn: <strong>linkedin.com/in/indigo-collier-134230288</strong>
       </p>
-      <p>&copy; 2026 Indigo Collier</p>
+      <p class="text-gray-500 font-semibold text-lg">&copy; 2026 Indigo Collier</p>
     </footer>
- 
+
   </body>
 </html>
- 
