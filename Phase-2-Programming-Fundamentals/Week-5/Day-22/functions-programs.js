@@ -261,7 +261,7 @@ console.log(generateOrderSummary("Indigo Collier", "Wireless Headphones", 89.99,
 // Customer has spent $350 → 10% loyalty discount applied
 
 
-//Practice 
+//Practice #1
 const scores = [72, 95, 61, 88, 45, 79];
 
 function checkScores(num) {
@@ -274,4 +274,87 @@ function checkScores(num) {
   }
 }
 
-checkScores(scores);
+ checkScores(scores);
+
+ // Practice #2
+
+const temperatures = [68, 74, 91, 55, 82, 63];
+
+function countHotDays (temp) {
+
+let count = 0;
+for (let i = 0; i < temp.length; i++) {
+
+if ( temp[i] >= 80) { 
+
+  count++;
+  
+  }
+
+  }
+   return count++;
+}
+
+console.log(countHotDays(temperatures));
+
+// Practice #3
+const names = ["Shani", "Travis", "Rashon", "Indigo", "Sam", "Taylor"];
+
+
+function findLongNames(name) {
+
+for (let i = 0; i < name.length; i++) {
+
+  if (name[i].length > 5) {
+    console.log(name[i]);
+  }
+}
+
+}
+
+findLongNames(names);
+
+//Practice #4
+
+const cart = [
+  { item: "shoes", price: 79.99 },
+  { item: "shirt", price: 24.99 },
+  { item: "jacket", price: 120.00 },
+  { item: "socks", price: 8.99 },
+  { item: "hat", price: 34.99 }
+];
+
+function cartTotal (purchaseItems) {
+  let priceCount = 0;
+  for (let i = 0; i < purchaseItems.length; i++) {
+   priceCount += purchaseItems[i].price;
+   
+  }
+  return priceCount;
+}
+
+console.log(cartTotal(cart));
+
+// Practice #5
+
+const orders = [
+  { table: 1, total: 45.00, paid: true },
+  { table: 2, total: 82.50, paid: false },
+  { table: 3, total: 31.00, paid: true },
+  { table: 4, total: 97.75, paid: false },
+  { table: 5, total: 58.25, paid: true }
+];
+
+function getUnpaidTables (table) {
+  
+  let notPaid = 0;
+  for (let i = 0; i < table.length; i++) {
+
+    if(!table[i].paid ) {
+      console.log("Table" + " " + table[i].table + " " + "owes" + " " + "$" + table[i].total)
+    }
+  }
+
+}
+
+getUnpaidTables(orders);
