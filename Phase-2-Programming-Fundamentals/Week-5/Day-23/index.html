@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Restaurant Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    button {
+      padding: 10px 20px;
+      margin: 5px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .feature-section {
+      margin: 30px 0;
+      padding: 20px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      background-color: #fafafa;
+    }
+    input {
+      padding: 10px;
+      width: 250px;
+      font-size: 16px;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+    }
+    .theme-btn {
+      width: 80px;
+      height: 40px;
+      margin: 5px;
+    }
+    #theme-preview {
+      width: 100px;
+      height: 100px;
+      border: 3px solid #333;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+    #info-content {
+      margin-top: 15px;
+      padding: 15px;
+      background-color: #e8f5e9;
+      border-radius: 5px;
+    }
+    #guest-count {
+      font-size: 32px;
+      font-weight: bold;
+      color: #4CAF50;
+      margin: 0 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 id="main-title">Welcome to Mario's Pizzeria</h1>
+    <p>Interactive features demonstration for restaurant website</p>
+
+    <!-- Feature 1: Button changes text -->
+    <div class="feature-section">
+      <h3>🍕 Daily Special</h3>
+      <p id="special-text">Click the button to reveal today's special!</p>
+      <button id="reveal-special">Show Special</button>
+    </div>
+
+    <!-- Feature 2: Input displays text -->
+    <div class="feature-section">
+      <h3>📋 Make a Reservation</h3>
+      <label for="name-input">Enter your name:</label><br>
+      <input type="text" id="name-input" placeholder="Your name here">
+      <p>Reservation for: <strong><span id="name-display">___</span></strong></p>
+    </div>
+
+    <!-- Feature 3: Color picker -->
+    <div class="feature-section">
+      <h3>🎨 Choose Theme Color</h3>
+      <p>Pick a color to see the preview:</p>
+      <button class="theme-btn" data-color="#ff6b6b" style="background-color: #ff6b6b;">Red</button>
+      <button class="theme-btn" data-color="#4ecdc4" style="background-color: #4ecdc4;">Teal</button>
+      <button class="theme-btn" data-color="#45b7d1" style="background-color: #45b7d1;">Blue</button>
+      <div id="theme-preview"></div>
+    </div>
+
+    <!-- Feature 4: Show/Hide -->
+    <div class="feature-section">
+      <h3>⏰ Business Hours</h3>
+      <button id="toggle-info">Show Hours</button>
+      <div id="info-content" style="display: none;">
+        <p><strong>Monday - Friday:</strong> 11:00 AM - 10:00 PM</p>
+        <p><strong>Saturday:</strong> 12:00 PM - 11:00 PM</p>
+        <p><strong>Sunday:</strong> 12:00 PM - 9:00 PM</p>
+        <p>Happy Hour: Monday-Friday 3:00-6:00 PM</p>
+      </div>
+    </div>
+
+    <!-- Feature 5: Counter -->
+    <div class="feature-section">
+      <h3>👥 Party Size</h3>
+      <p>How many guests in your party?</p>
+      <button id="decrease">-</button>
+      <span id="guest-count">2</span>
+      <button id="increase">+</button>
+      <p><em>guests in party</em></p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
